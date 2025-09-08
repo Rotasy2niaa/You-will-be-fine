@@ -23,6 +23,8 @@ public class EffectManager : MonoBehaviour
     public float pulseSpeed = 4.5f;  // 频率
     [Range(0f, 1f)] public float pulseDepth = 0.25f; // 脉动幅度(占 blackoutMaxAlpha 的比例)
 
+    [SerializeField] private AudioSource breathingSFX;
+
     Coroutine running;
 
     void Awake()
@@ -75,23 +77,26 @@ public class EffectManager : MonoBehaviour
 
     IEnumerator Sequence()
     {
-        // 淡入
-        yield return Blend(effectVolume, 0f, 1f, fadeInTime, true);
-
-        // 保持
-        if (holdTime > 0f)
+        while (true)
         {
-            float t = 0f;
-            while (t < holdTime)
-            {
-                t += Time.deltaTime;
-                if (enablePulse) ApplyPulse(effectVolume ? effectVolume.weight : 1f);
-                yield return null;
-            }
-        }
+            // 淡入
+            yield return Blend(effectVolume, 0f, 1f, fadeInTime, true);
 
-        // 淡出
-        yield return Blend(effectVolume, 1f, 0f, fadeOutTime, true);
+            // 保持
+            if (holdTime > 0f)
+            {
+                float t = 0f;
+                while (t < holdTime)
+                {
+                    t += Time.deltaTime;
+                    if (enablePulse) ApplyPulse(effectVolume ? effectVolume.weight : 1f);
+                    yield return null;
+                }
+            }
+
+            // 淡出
+            yield return Blend(effectVolume, 1f, 0f, fadeOutTime, true);
+        }
 
         running = null;
     }
@@ -153,6 +158,8 @@ public class EffectManager : MonoBehaviour
 
     float ApplyPulseReturn(float baseAlpha)
     {
+        // Time.time * 4 / (2.0f * Mathf.PI) * pulseSpeed
+        breathingSFX.pitch = (2.0f * Mathf.PI) / (breathingSFX.clip.length * pulseSpeed);
         if (!enablePulse) return baseAlpha;
         // 0..1 的正弦脉动
         float pulse = (Mathf.Sin(Time.time * pulseSpeed) * 0.5f + 0.5f); // [0..1]
