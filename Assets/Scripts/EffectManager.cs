@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections;
+using UnityEngine.UI;
 
 public class EffectManager : MonoBehaviour
 {
