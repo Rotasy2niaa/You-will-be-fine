@@ -7,17 +7,20 @@ public class ClickBubbleBehavior : MonoBehaviour
     [SerializeField] private float targetPulseSpeed;
 
     private bool progressing = false;
-    private float pressedTime = 0f;
+    private float startTime = 0f;
     private float progress = 0f;
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (!progressing)
+        if (progressing)
         {
-            pressedTime = 0f;
-            progress = 0f;
+            progress = (Time.time - startTime) * targetPulseSpeed;
+            if (progress > 2f * Mathf.PI)
+            {
+                progressing = false;
+                EffectManager._instance.SuccessfullySyncPulse();
+            }
         }
-        progressing = false;
 
         // Distance z along camera forward (positive in front)
         Vector3 camToObj = transform.position - Camera.main.transform.position;
@@ -62,14 +65,20 @@ public class ClickBubbleBehavior : MonoBehaviour
 
     public void OnClicked()
     {
-        Debug.Log("Debug");
-        pressedTime += Time.deltaTime;
-        progress = pressedTime * targetPulseSpeed;  // Range is 0 ~ 2 * PI
-        if (progress > 1)
-        {
-            progress = 1;
-        }
+        startTime = Time.time;
 
         progressing = true;
+
+        EffectManager._instance.ForceSyncPulse(targetPulseSpeed);
+    }
+
+    public void OnReleased()
+    {
+        startTime = 0f;
+        progress = 0f;
+
+        progressing = false;
+
+        EffectManager._instance.EndSyncPulse();
     }
 }

@@ -359,8 +359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsClickable:
     serializedVersion: 2
-    m_Bits: 0
-  maxDist: 0
+    m_Bits: 32768
+  maxDist: 500
 --- !u!1 &338138869
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +524,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1e34b572c14513544a810eb4557096a3, type: 3}
   m_Resource: {fileID: 8300000, guid: 1e34b572c14513544a810eb4557096a3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -957,7 +957,7 @@ GameObject:
   - component: {fileID: 810526969}
   - component: {fileID: 810526974}
   - component: {fileID: 810526973}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Click Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,8 +1078,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredScreenRadius: 40
-  radiusPulseAmp: 10
-  targetPulseSpeed: 0
+  radiusPulseAmp: 40
+  targetPulseSpeed: 4.5
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,13 +1703,16 @@ MonoBehaviour:
   blackoutUI: {fileID: 263990711}
   blockInputWhileActive: 1
   blackoutMaxAlpha: 0.823
-  fadeInTime: 1.5
-  holdTime: 0
-  fadeOutTime: 1.2
+  fadeInTime: 0
+  holdTime: 2
+  fadeOutTime: 0
   enablePulse: 1
-  pulseSpeed: 4.5
+  unsyncedPulseSpeed: 4.5
   pulseDepth: 0.25
   breathingSFX: {fileID: 343524343}
+  pulseSynced: 0
+  targetSyncPulseSpeed: 0
+  syncStartTime: 0
 --- !u!1 &11710798075509696
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EffectManager : MonoBehaviour
 {
+    public static EffectManager _instance;
+
     [Header("Volumes")]
     public Volume baseVolume;     // 可选：正常那套(通常 weight=1)
     public Volume effectVolume;   // 发作滤镜(初始 weight=0, Priority更高)
@@ -21,15 +23,23 @@ public class EffectManager : MonoBehaviour
 
     [Header("Pulse (breathing/heartbeat)")]
     public bool enablePulse = true;  // 是否启用黑幕脉动
-    public float pulseSpeed = 4.5f;  // 频率
+    public float unsyncedPulseSpeed = 4.5f;  // 频率
     [Range(0f, 1f)] public float pulseDepth = 0.25f; // 脉动幅度(占 blackoutMaxAlpha 的比例)
 
     [SerializeField] private AudioSource breathingSFX;
+    [SerializeField] private bool pulseSynced = false;
+    [SerializeField] private float targetSyncPulseSpeed = 0f;
+    [SerializeField] private float syncStartTime = 0f;
 
     Coroutine running;
 
     void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+
         // 初始化状态
         if (baseVolume) baseVolume.weight = 1f;
         if (effectVolume) effectVolume.weight = 0f;
@@ -78,26 +88,28 @@ public class EffectManager : MonoBehaviour
 
     IEnumerator Sequence()
     {
+        // 淡入
+        yield return Blend(effectVolume, 0f, 1f, fadeInTime, true);
+
+        // 保持
+        //if (holdTime > 0f)
+        //{
+        //    float t = 0f;
+        //    while (t < holdTime)
+        //    {
+        //        t += Time.deltaTime;
+        //        if (enablePulse) ApplyPulse(effectVolume ? effectVolume.weight : 1f);
+        //        yield return null;
+        //    }
+        //}
         while (true)
         {
-            // 淡入
-            yield return Blend(effectVolume, 0f, 1f, fadeInTime, true);
-
-            // 保持
-            if (holdTime > 0f)
-            {
-                float t = 0f;
-                while (t < holdTime)
-                {
-                    t += Time.deltaTime;
-                    if (enablePulse) ApplyPulse(effectVolume ? effectVolume.weight : 1f);
-                    yield return null;
-                }
-            }
-
-            // 淡出
-            yield return Blend(effectVolume, 1f, 0f, fadeOutTime, true);
+            if (enablePulse) ApplyPulse(effectVolume ? effectVolume.weight : 1f);
+            yield return null;
         }
+
+        // 淡出
+        yield return Blend(effectVolume, 1f, 0f, fadeOutTime, true);
 
         running = null;
     }
@@ -150,6 +162,24 @@ public class EffectManager : MonoBehaviour
         }
     }
 
+    public void ForceSyncPulse(float targetPulseSpeed)
+    {
+        pulseSynced = true;
+        syncStartTime = Time.time;
+        targetSyncPulseSpeed = targetPulseSpeed;
+    }
+
+    public void EndSyncPulse()
+    {
+        pulseSynced = false;
+    }
+
+    public void SuccessfullySyncPulse()
+    {
+        pulseSynced = false;
+        unsyncedPulseSpeed = targetSyncPulseSpeed;
+    }
+
     // 让黑幕按节奏轻微起伏（呼吸/心跳感）
     void ApplyPulse(float weight01)
     {
@@ -159,12 +189,11 @@ public class EffectManager : MonoBehaviour
 
     float ApplyPulseReturn(float baseAlpha)
     {
-        // Time.time * 4 / (2.0f * Mathf.PI) * pulseSpeed
-        breathingSFX.pitch = (2.0f * Mathf.PI) / (breathingSFX.clip.length * pulseSpeed);
+        breathingSFX.pitch = (2.0f * Mathf.PI) / (breathingSFX.clip.length * (pulseSynced ? targetSyncPulseSpeed : unsyncedPulseSpeed));
         if (!enablePulse) return baseAlpha;
         // 0..1 的正弦脉动
-        float pulse = (Mathf.Sin(Time.time * pulseSpeed) * 0.5f + 0.5f); // [0..1]
-        float delta = blackoutMaxAlpha * pulseDepth * (pulse - 0.5f) * 2f; // [-depth..+depth] * maxAlpha
+        float pulse = Mathf.Sin((Time.time - syncStartTime) * (pulseSynced ? targetSyncPulseSpeed : unsyncedPulseSpeed));
+        float delta = blackoutMaxAlpha * pulseDepth * -pulse; // [-depth..+depth] * maxAlpha
         return Mathf.Clamp01(baseAlpha + delta);
     }
 }
