@@ -62,6 +62,7 @@ public class ClickBubbleBehavior : MonoBehaviour
 
     public void OnClicked()
     {
+        Debug.Log("Debug");
         pressedTime += Time.deltaTime;
         progress = pressedTime * targetPulseSpeed;  // Range is 0 ~ 2 * PI
         if (progress > 1)
