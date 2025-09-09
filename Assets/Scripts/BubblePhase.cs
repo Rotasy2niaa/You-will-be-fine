@@ -21,6 +21,7 @@ public class BubblePhase : MonoBehaviour
         {
             triggered = true;
             // 播放对话；对话结束后，再触发下一阶段事件
+            DialogueManager.Instance.AdvanceStage();
             DialogueManager.Instance.StartDialogue(linesWhenReached, () => {
                 onPhaseCompleted?.Invoke(); // 这里接你“其他 click 的动作启用”等
             });

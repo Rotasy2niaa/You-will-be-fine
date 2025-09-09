@@ -20,6 +20,8 @@ public class DialogueManager : MonoBehaviour
     private bool active;
     private Action onComplete;
 
+    private int finishedDialogCount = 0;
+
     void Awake()
     {
         if (Instance && Instance != this) { Destroy(gameObject); return; }
@@ -55,5 +57,13 @@ public class DialogueManager : MonoBehaviour
         if (panel) panel.SetActive(false);
         var cb = onComplete; onComplete = null;
         cb?.Invoke();
+
+        finishedDialogCount++;
+
+        if (finishedDialogCount > 3)
+        {
+            AdvanceStage();
+            EffectManager._instance.EndAttack();
+        }
     }
 }

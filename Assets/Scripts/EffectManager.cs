@@ -196,4 +196,11 @@ public class EffectManager : MonoBehaviour
         float delta = blackoutMaxAlpha * pulseDepth * -pulse; // [-depth..+depth] * maxAlpha
         return Mathf.Clamp01(baseAlpha + delta);
     }
+
+    public void EndAttack()
+    {
+        StopAllCoroutines();
+        effectVolume.weight = 0f;
+        blackoutUI.alpha = 0f;
+    }
 }

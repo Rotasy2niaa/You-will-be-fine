@@ -7,9 +7,9 @@ public class ClickableObject : MonoBehaviour
     public int requiredStage = 1;   // med 设成 3
 
     [Header("外观")]
-    private Renderer rend;
-    private Color originalColor;
-    public Color hoverColor = new Color(1f, 0.5f, 0.5f);
+    //private Renderer rend;
+    //private Color originalColor;
+    //public Color hoverColor = new Color(1f, 0.5f, 0.5f);
 
     [Header("描述对话")]
     [TextArea] public string[] descriptionLines;
@@ -18,8 +18,9 @@ public class ClickableObject : MonoBehaviour
 
     void Start()
     {
-        rend = GetComponent<Renderer>();
-        if (rend) originalColor = rend.material.color;
+        //rend = GetComponent<Renderer>();
+        //if (rend) originalColor = rend.material.color;
+        transform.Find("outline").gameObject.SetActive(false);
     }
 
     bool Unlocked()
@@ -28,31 +29,62 @@ public class ClickableObject : MonoBehaviour
             || DialogueManager.Instance.CurrentStage >= requiredStage;
     }
 
-    void OnMouseEnter()
+    //void OnMouseEnter()
+    //{
+    //    Debug.Log(transform.name);
+    //    if (consumed) return;
+    //    if (!Unlocked()) return;          // 未到阶段，不高亮
+    //    //if (rend) rend.material.color = hoverColor;
+    //    transform.Find("outline").gameObject.SetActive(true);
+    //}
+
+    //void OnMouseExit()
+    //{
+    //    if (consumed) return;
+    //    if (!Unlocked()) return;          // 未到阶段，不变化
+    //    //if (rend) rend.material.color = originalColor;
+    //    transform.Find("outline").gameObject.SetActive(false);
+    //}
+
+    //void OnMouseDown()
+    //{
+    //    if (consumed) return;
+    //    if (!Unlocked()) return;          // 未到阶段，不可点
+
+    //    consumed = true;
+    //    //if (rend) rend.material.color = originalColor;
+    //    transform.Find("outline").gameObject.SetActive(false);
+
+    //    if (descriptionLines != null && descriptionLines.Length > 0)
+    //        DialogueManager.Instance?.StartDialogue(descriptionLines);
+
+    //    // TODO: 这里照旧做你的计数：clickPhase.RegisterClick();
+    //}
+
+    public void Highlight()
     {
         if (consumed) return;
-        if (!Unlocked()) return;          // 未到阶段，不高亮
-        if (rend) rend.material.color = hoverColor;
+        if (!Unlocked()) return;
+        transform.Find("outline").gameObject.SetActive(true);
     }
 
-    void OnMouseExit()
+    public void CancelHighlight()
     {
         if (consumed) return;
-        if (!Unlocked()) return;          // 未到阶段，不变化
-        if (rend) rend.material.color = originalColor;
+        if (!Unlocked()) return;
+        transform.Find("outline").gameObject.SetActive(false);
     }
 
-    void OnMouseDown()
+    public void Interact()
     {
         if (consumed) return;
         if (!Unlocked()) return;          // 未到阶段，不可点
 
         consumed = true;
-        if (rend) rend.material.color = originalColor;
+
+        CancelHighlight();
 
         if (descriptionLines != null && descriptionLines.Length > 0)
             DialogueManager.Instance?.StartDialogue(descriptionLines);
-
-        // TODO: 这里照旧做你的计数：clickPhase.RegisterClick();
     }
 }
