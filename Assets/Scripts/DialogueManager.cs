@@ -8,8 +8,18 @@ public class DialogueManager : MonoBehaviour
 
     // ====== 新增：全局阶段（从 1 开始）======
     public int CurrentStage { get; private set; } = 1;
-    public void SetStage(int stage) => CurrentStage = Mathf.Max(1, stage);
-    public void AdvanceStage() => CurrentStage++;
+    public void SetStage(int stage)
+    {
+        CurrentStage = Mathf.Max(1, stage);
+        Debug.Log($"[DialogueManager] SetStage -> current stage = {CurrentStage}");
+    }
+
+    public void AdvanceStage()
+    {
+        CurrentStage++;
+        Debug.Log($"[DialogueManager] AdvanceStage -> current stage = {CurrentStage}");
+    }
+
 
     // 下面保持你原来的对话逻辑即可（若还没写，可忽略）
     [Header("UI")]

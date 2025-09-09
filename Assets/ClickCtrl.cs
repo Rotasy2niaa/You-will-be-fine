@@ -49,6 +49,11 @@ public class ClickCtrl : MonoBehaviour
             {
                 res.Interact();
             }
+            else
+            {
+                res.Highlight();
+
+            }
         }
         else
         {

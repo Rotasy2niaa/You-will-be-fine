@@ -362,8 +362,8 @@ MonoBehaviour:
     m_Bits: 32768
   whatIsClickable:
     serializedVersion: 2
-    m_Bits: 0
-  maxDist: 500
+    m_Bits: 16384
+  maxDist: 1500
 --- !u!1 &338138869
 GameObject:
   m_ObjectHideFlags: 0
@@ -761,7 +761,7 @@ GameObject:
   - component: {fileID: 466204328}
   - component: {fileID: 466204330}
   - component: {fileID: 466204329}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,8 +868,10 @@ MonoBehaviour:
   target: 3
   linesWhenReached:
   - You are doing great
-  - Now let's try on naming things around you
-  - This help you calm down
+  - Now let's try naming things around you
+  - And then after you calm down, let's take the med beside your bed
+  - you already went so far
+  - everything will be better from now
   onPhaseCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -945,7 +947,7 @@ GameObject:
   - component: {fileID: 539855736}
   - component: {fileID: 539855738}
   - component: {fileID: 539855737}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredScreenRadius: 60
-  radiusPulseAmp: 40
+  radiusPulseAmp: 50
   targetPulseSpeed: 1.5
   bubblePhase: {fileID: 475782768}
 --- !u!135 &595268628
@@ -1490,7 +1492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredScreenRadius: 60
-  radiusPulseAmp: 40
+  radiusPulseAmp: 50
   targetPulseSpeed: 3.5
   bubblePhase: {fileID: 475782768}
 --- !u!1 &832575517
@@ -1696,7 +1698,7 @@ GameObject:
   - component: {fileID: 902816074}
   - component: {fileID: 902816077}
   - component: {fileID: 902816075}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1782,7 +1784,7 @@ GameObject:
   - component: {fileID: 957525169}
   - component: {fileID: 957525171}
   - component: {fileID: 957525170}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2263,7 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredScreenRadius: 60
-  radiusPulseAmp: 40
+  radiusPulseAmp: 50
   targetPulseSpeed: 2.5
   bubblePhase: {fileID: 475782768}
 --- !u!135 &1111913480
@@ -5441,7 +5443,7 @@ GameObject:
   - component: {fileID: 2586492297882010669}
   - component: {fileID: 5565290003558727846}
   - component: {fileID: 5565290003558727845}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: clickable_fish_bowl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6303,7 +6305,7 @@ GameObject:
   - component: {fileID: 4602802425140814456}
   - component: {fileID: 5605058634646482896}
   - component: {fileID: 5605058634646482895}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: clickable_family_photo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7997,7 +7999,7 @@ GameObject:
   - component: {fileID: 853602674096025209}
   - component: {fileID: 7045249009499653382}
   - component: {fileID: 7045249009499653381}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: clickable_med
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8019,6 +8021,7 @@ MonoBehaviour:
   requiredStage: 3
   descriptionLines:
   - You will be fine
+  - I promise
 --- !u!64 &7045249009499653382
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10424,7 +10427,7 @@ GameObject:
   - component: {fileID: 1964303454750104714}
   - component: {fileID: 9044447948633956604}
   - component: {fileID: 9044447948633956603}
-  m_Layer: 20
+  m_Layer: 14
   m_Name: clickable_plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
