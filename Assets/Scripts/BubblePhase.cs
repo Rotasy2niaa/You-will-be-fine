@@ -1,0 +1,29 @@
+using UnityEngine;
+using UnityEngine.Events;
+
+public class BubblePhase : MonoBehaviour
+{
+    [Header("目标与台词")]
+    public int target = 3;
+    [TextArea] public string[] linesWhenReached;
+
+    [Header("到达阈值后触发的事件（对话结束后再触发）")]
+    public UnityEvent onPhaseCompleted;
+
+    private int count = 0;
+    private bool triggered = false;
+
+    public void CountBubble()
+    {
+        if (triggered) return;
+        count++;
+        if (count >= target)
+        {
+            triggered = true;
+            // 播放对话；对话结束后，再触发下一阶段事件
+            DialogueManager.Instance.StartDialogue(linesWhenReached, () => {
+                onPhaseCompleted?.Invoke(); // 这里接你“其他 click 的动作启用”等
+            });
+        }
+    }
+}

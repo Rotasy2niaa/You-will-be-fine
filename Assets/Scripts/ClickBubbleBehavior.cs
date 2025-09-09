@@ -10,6 +10,8 @@ public class ClickBubbleBehavior : MonoBehaviour
     private float startTime = 0f;
     private float progress = 0f;
 
+    public BubblePhase bubblePhase;
+
     private void FixedUpdate()
     {
         if (progressing)
@@ -19,6 +21,8 @@ public class ClickBubbleBehavior : MonoBehaviour
             {
                 progressing = false;
                 EffectManager._instance.SuccessfullySyncPulse();
+                bubblePhase.CountBubble();
+                Destroy(gameObject);
             }
         }
 
