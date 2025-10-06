@@ -1209,6 +1209,7 @@ GameObject:
   - component: {fileID: 716910313}
   - component: {fileID: 716910312}
   - component: {fileID: 716910311}
+  - component: {fileID: 716910317}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1231,7 +1232,7 @@ MonoBehaviour:
   targetCamTransform: {fileID: 330585546}
   mouseSensitivity: 120
   horizontalSpeed: 10
-  jumpSpeed: 0
+  jumpSpeed: 1
   gravity: 1.32
   extraGravity: 0.16
   coyoteTime: 0
@@ -1239,7 +1240,7 @@ MonoBehaviour:
   groundCheckR: 0
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4294967295
 --- !u!143 &716910312
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1295,7 +1296,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716910310}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1357,6 +1358,33 @@ Transform:
   - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 106.818, z: 0}
+--- !u!54 &716910317
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716910310}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &810526968
 GameObject:
   m_ObjectHideFlags: 0
@@ -4186,7 +4214,7 @@ GameObject:
   - component: {fileID: 3297198559767788439}
   - component: {fileID: 5519486855433421134}
   m_Layer: 0
-  m_Name: low_poly_interior_room_low_poly_interiorFBXASC046933
+  m_Name: room_nightstand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4251,7 +4279,7 @@ GameObject:
   - component: {fileID: 8108895518909653373}
   - component: {fileID: 8537842420745544781}
   m_Layer: 0
-  m_Name: low_poly_interior_room_low_poly_interiorFBXASC0461118
+  m_Name: room_window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4380,7 +4408,7 @@ GameObject:
   - component: {fileID: 676044325586756049}
   - component: {fileID: 2500347023239612752}
   m_Layer: 0
-  m_Name: low_poly_interior_room_low_poly_interiorFBXASC046947
+  m_Name: room_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4403,7 +4431,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 433.20032, y: 0.12817384, z: 404.99548}
   m_Center: {x: 416.60016, y: 1199.8695, z: -802.49774}
@@ -4567,7 +4595,7 @@ GameObject:
   - component: {fileID: 1549644884561718848}
   - component: {fileID: 7963003364404603012}
   m_Layer: 0
-  m_Name: low_poly_interior_furniture_low_poly_interiorFBXASC046327
+  m_Name: room_picture3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4734,7 +4762,7 @@ GameObject:
   - component: {fileID: 8560620113127766666}
   - component: {fileID: 8560620113127766667}
   m_Layer: 0
-  m_Name: low_poly_interior_room_low_poly_interiorFBXASC0461117
+  m_Name: room_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6882,7 +6910,7 @@ GameObject:
   - component: {fileID: 1006933907040962857}
   - component: {fileID: 1786898961706811558}
   m_Layer: 0
-  m_Name: low_poly_interior_furniture_low_poly_interiorFBXASC046328
+  m_Name: room_poster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6990,7 +7018,7 @@ GameObject:
   - component: {fileID: 5434646836846774373}
   - component: {fileID: 7479215273852845020}
   m_Layer: 0
-  m_Name: low_poly_interior_furniture_low_poly_interiorFBXASC046368
+  m_Name: room_picture1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9138,7 +9166,7 @@ GameObject:
   - component: {fileID: 5688064232988360624}
   - component: {fileID: 213041318444584091}
   m_Layer: 0
-  m_Name: low_poly_interiorFBXASC046369_low_poly_interior_furniture
+  m_Name: room_picture2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9450,7 +9478,7 @@ GameObject:
   - component: {fileID: 6787820120353918805}
   - component: {fileID: 6576425962050445770}
   m_Layer: 0
-  m_Name: low_poly_interior_furniture_low_poly_interiorFBXASC046329
+  m_Name: room_poster3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
